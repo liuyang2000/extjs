@@ -59,16 +59,6 @@ Ext.define('app.view.main.Main', {
             handler: 'onClickButton'
         }]
     }, {
-        xtype: 'mainmenutree',
-        region: 'west', // 左边面板
-        width: 250,
-        split: true
-    }, {
-        xtype: 'mainmenuaccordion',
-        region: 'west', // 左边面板
-        width: 250,
-        split: true
-    }, {
         region: 'center',
         xtype: 'tabpanel',
         items: [{
