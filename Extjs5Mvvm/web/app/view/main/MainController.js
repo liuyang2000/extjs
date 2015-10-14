@@ -12,6 +12,8 @@ Ext.define('app.view.main.MainController', {
         'Ext.window.MessageBox'
     ],
 
+    uses : ['app.view.module.Module'],
+
     alias: 'controller.main',
 
     onClickButton: function () {
@@ -61,5 +63,16 @@ Ext.define('app.view.main.MainController', {
         if (this.showButton && !this.showButton.hidden) {
             this.showButton.setX(document.body.clientWidth - 32);
         }
+    },
+
+    // 选择了主菜单上的菜单后执行
+    onMainMenuClick : function(menuitem) {
+        var maincenter = this.getView().down('maincenter');
+
+        maincenter.setActiveTab(maincenter.add({
+            xtype : 'modulepanel',
+            closable : true,
+            reorderable : true
+        }));
     }
 });
