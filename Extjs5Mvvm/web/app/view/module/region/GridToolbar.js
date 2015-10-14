@@ -16,6 +16,7 @@ Ext.define('app.view.module.region.GridToolbar', {
             text: '新增',
             xtype: 'splitbutton',
             glyph: 0xf016,
+            handler : 'addRecord',
             menu: [{
                 text: '复制新增',
                 tooltip: '新增时先将当前记录添入到新记录中',
