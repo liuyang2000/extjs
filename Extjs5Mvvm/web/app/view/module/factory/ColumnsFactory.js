@@ -76,7 +76,7 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                 dataIndex: fd.tf_fieldName
             }
 
-            switch (fd.tf_fieldType) {
+            /*switch (fd.tf_fieldType) {
                 case 'Date' :
                     Ext.apply(field, {
                         xtype: 'datecolumn',
@@ -133,6 +133,121 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                 case 'String' :
 
                     break;
+                default :
+                    break;
+            }*/
+
+            switch (fd.tf_fieldType) {
+                case 'Date' :
+                    Ext.apply(field, {
+                        xtype : 'datecolumn',
+                        align : 'center',
+                        width : 100,
+                        formatter : 'dateRenderer', // 定义在Ext.util.Format中的渲染函数可以用这种方法调用
+                        editor : { // 如果需要行内修改，需要加入此属性
+                            xtype : 'datefield',
+                            format : 'Y-m-d',
+                            editable : false
+                        }
+                    });
+                    break;
+
+                case 'Datetime' :
+                    Ext.apply(field, {
+                        xtype : 'datecolumn',
+                        align : 'center',
+                        width : 130,
+                        formatter : 'dateRenderer'
+                    });
+                    break;
+
+                case 'Boolean' :
+                    field.xtype = 'checkcolumn';
+                    field.stopSelection = false;
+                    field.processEvent = function(type) { // 加入这一句，可以防止点中修改
+                        if (type == 'click')
+                            return false;
+                    };
+                    break;
+
+               /* case 'Integer' :
+                    Ext.apply(field, {
+                        align : 'center',
+                        xtype : 'numbercolumn',
+                        tdCls : 'intcolor',
+                        format : '#',
+                        formatter : 'intRenderer',
+                        editor : {
+                            xtype : 'numberfield'
+                        }
+                    });
+                    break;*/
+
+                case 'Integer' :
+                    Ext.apply(field, {
+                        align : 'center',
+                        xtype : 'numbercolumn',
+                        format : '#',
+                        renderer : Ext.util.Format.intRenderer,
+                        // formatter : 'intRenderer',
+                        editor : {
+                            xtype : 'numberfield'
+                        }
+                    });
+                    break;
+
+                case 'Double' :
+                    Ext.apply(field, {
+                        align : 'center',
+                        xtype : 'numbercolumn',
+                        width : 110,
+                        // renderer : Ext.util.Format.monetary, //这种方法和下面的方法是一样的
+                        formatter : fd.tf_isMoney // 判断是否是金额类型的
+                            ? 'monetaryRenderer'
+                            : 'floatRenderer', // 这种方法也可以
+                        editor : {
+                            xtype : 'numberfield'
+                        }
+                    });
+                    break;
+
+                case 'Float' :
+                    Ext.apply(field, {
+                        align : 'center',
+                        xtype : 'numbercolumn',
+                        width : 110,
+                        formatter : 'floatRenderer' // 这种方法也可以
+                    });
+                    break;
+
+                case 'Percent' :
+                    Ext.apply(field, {
+                        align : 'center',
+                        formatter : 'percentRenderer',
+                        // xtype : 'widgetcolumn', // 这里注释掉的是extjs5自带的百分比类型的显示方法
+                        // widget : {
+                        // xtype : 'progressbarwidget',
+                        // textTpl : ['{percent:number("0.00")}%']
+                        // },
+                        editor : {
+                            xtype : 'numberfield',
+                            step : 0.01
+                        },
+                        width : 110  // 默认宽度
+                    })
+                    break;
+
+                case 'String' :
+                    // 如果这个字段是此模块的nameFields则加粗显示
+                    if (module.get('tf_nameFields') == fd.tf_fieldName)
+                        Ext.apply(field, {
+                            text : '<strong>' + fd.tf_title + '</strong>',
+                            formatter : 'nameFieldRenderer'
+                        });
+                    else
+                        Ext.apply(field, {});
+                    break;
+
                 default :
                     break;
             }

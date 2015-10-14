@@ -110,6 +110,12 @@
         {
             "path": "app.js",
             "bundle": true
+        },
+        {
+            "path": "ext/packages/ext-locale/build/ext-locale-zh_CN.js"
+        },
+        {
+            "path": "app/ux/Renderer.js"
         }
     ],
 

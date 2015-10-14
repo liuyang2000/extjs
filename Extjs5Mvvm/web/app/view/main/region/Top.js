@@ -9,11 +9,17 @@ Ext.define('app.view.main.region.Top', {
     extend: 'Ext.toolbar.Toolbar',
 
     alias: 'widget.maintop', // 定义了这个组件的xtype类型为maintop
-    uses: ['app.ux.ButtonTransparent', 'app.view.main.region.ButtonMainMenu'],
+    uses : ['app.ux.ButtonTransparent', 'app.view.main.menu.ButtonMainMenu',
+        'app.view.main.menu.SettingMenu'],
 
     defaults: {
         xtype: 'buttontransparent'
     },
+
+    style : 'background-color : #cde6c7',
+
+    height : 40,
+
     items: [{
         xtype: 'image',
         bind: { // 数据绑定到MainModel中data的system.iconUrl
@@ -45,6 +51,8 @@ Ext.define('app.view.main.region.Top', {
     }, {
         text: '注销',
         glyph: 0xf011
+    },{
+        xtype : 'settingmenu'
     }, '->', '->', {
         text: '搜索',
         glyph: 0xf002

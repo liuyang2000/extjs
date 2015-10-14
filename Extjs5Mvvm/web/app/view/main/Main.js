@@ -14,13 +14,9 @@ Ext.define('app.view.main.Main', {
 
     xtype: 'app-main',
 
-    uses: ['app.view.main.region.Top',
-        'app.view.main.region.Bottom',
-        'app.view.main.region.Center',
-        'app.view.main.region.MainMenuToolbar',
-        'app.view.main.region.MainMenuTree',
-        'app.view.main.region.AccordionMainMenu'
-    ],
+    uses : ['app.view.main.region.Center', 'app.view.main.region.Top',
+        'app.view.main.region.Bottom', 'app.view.main.menu.MainMenuToolbar',
+        'app.view.main.region.Left'],
 
     controller: 'main',
     viewModel: {
